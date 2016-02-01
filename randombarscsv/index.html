@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3 Demo: Bar chart with random values</title>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.14/d3.min.js"></script>
+		<style type="text/css">
+
+			.chart rect {
+				display: inline-block;
+				margin-right: 2px;
+				fill: teal;	
+			}
+		
+		</style>
+	</head>
+	<body>
+		<svg class="chart"></svg> <!-- Notice that our element is an SVG, we can change it's attibutes
+									   If this were instead a *div* we would have to change our group's 
+									   style variables instead of attr
+									-->
+
+		<script type="text/javascript">
+
+			var chartWidth = 500,
+				chartHeight = 400;
+
+			var y = d3.scale.linear()			// this is a mapping of our data to our chartHeight/chartWidth
+				.range([chartHeight, 0]);		// it allows us to fit our data to our chartWidth/Height
+				
+			var chart = d3.select(".chart")
+				.attr("width", chartWidth)
+				.attr("height", chartHeight); 
+
+			d3.csv('data.csv', type, function(error, dataset) {
+				console.log(dataset)
+				if(error) {console.log(error);}
+
+				y.domain([0, d3.max(dataset, function(d){return d.value})]);
+
+				var barWidth = chartWidth / dataset.length;
+
+				var bar = chart.selectAll("g")
+						.data(dataset)
+					.enter().append("g")
+					.attr("transform", function(d, i) { return "translate(" + i * barWidth + ", 0)"; }); // translate function moves each group of bars
+
+				bar.append("rect")
+					.attr("y", function(d) { return y(d.value); })						// this determines the bottom of the bars
+					.attr("height", function(d) {return chartHeight - y(d.value)})		// as our height is reversed, we need to calculate the chartHeight *minus* each data bar
+					.attr("width", barWidth - 1);
+
+			});	
+
+			function type(d) {
+			  d.value = +d.value; // coerce to number
+			  return d;
+			}
+			
+		</script>
+	</body>
+</html>
