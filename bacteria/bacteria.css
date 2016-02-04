@@ -1,7 +1,22 @@
 #main {
-	background-color: rgba(155,155,155, 0.7);
+	background-color: rgba(155,155,155, 0.3);
 }
 
-#main rect {
-	fill: teal;
+#main text {
+	color: #414141;
+}
+
+.axis {
+  font: 7px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+	display: none;
 }

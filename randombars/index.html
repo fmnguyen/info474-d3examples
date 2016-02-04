@@ -30,7 +30,7 @@
 			var chartWidth = 500,
 				chartHeight = 400;
 
-			var y = d3.scale.linear()			// this is a mapping of our data to our chartHeight/chartWidth
+			var y = d3.scale.linear()				// this is a mapping of our data to our chartHeight/chartWidth
 				.range([chartHeight, 0])		// it allows us to fit our data to our chartWidth/Height
 				.domain([0, d3.max(dataset)]);
 
