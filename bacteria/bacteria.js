@@ -37,6 +37,8 @@ d3.select("#main")
 // passes in the type() function which transforms a column of our data to an integer
 d3.csv("a1-burtin.csv", type, function(error, dataset) {
 
+	console.log(dataset)
+
 	var barWidth = (width - 50) / dataset.length;
 
 	// this maps each of our bacteria names to each of our columns
@@ -80,7 +82,7 @@ d3.csv("a1-burtin.csv", type, function(error, dataset) {
 });
 
 function type(d) {
-  d.Penicilin = +d.Penicilin; // coerce to number
+  d.Penicilin = +d.Penicilin; // coerces the string to number
   return d;
 }
 
