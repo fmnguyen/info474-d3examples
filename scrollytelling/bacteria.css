@@ -1,0 +1,65 @@
+#sections {
+	font-family: 'Lato', sans-serif;
+	position: relative;
+	display: inline-block;
+	width: 25%;
+	top: 0px;
+	z-index: 90;
+	margin: 0 5%;
+	color: #414141;
+}
+
+.step {
+ 	margin-bottom: 200px;
+ 	margin-top: 200px;
+}
+
+#extra-spacing {
+	height: 400px;
+}
+
+#vis {
+	display: inline-block;
+	position: fixed;
+	top: 60px;
+	z-index: 1;
+	margin-left: 0;
+
+	height: 600px;
+	width: 750px;
+	/*background-color: #ddd;*/
+}
+
+.title {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 700;
+	letter-spacing: 1.0px;
+	font-size: 2.0em;
+	color: #414141;
+	margin-bottom: 15px;
+}
+
+.axis {
+  font: 7px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+	display: none;
+}
+
+.bacteria-title {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 700;
+	letter-spacing: 1.0px;
+	font-size: 2.5em;
+	color: #D5E9A0;
+	fill: #D5E9A0;
+	margin-bottom: 15px;
+}
