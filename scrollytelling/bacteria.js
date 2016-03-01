@@ -12,6 +12,14 @@ var scrollVis = function() {
 	var width = 700;
 	var height = 520;
 
+  // main svg used for visualization
+  var svg = null;
+
+  // d3 selection that will be used
+  // for displaying visualizations
+  var g = null;
+
+
   // Keep track of which visualization
   // we are on and which was the last
   // index activated. When user scrolls
@@ -25,12 +33,6 @@ var scrollVis = function() {
   var squarePad = 2;
   var numPerRow = width / (squareSize + squarePad);
 
-  // main svg used for visualization
-  var svg = null;
-
-  // d3 selection that will be used
-  // for displaying visualizations
-  var g = null;
 
 	// set margins and width/height of parent chart
 	// Makes a log scale of our data (as we know is slightly skewed)
@@ -161,8 +163,7 @@ var scrollVis = function() {
 			.attr('width', x.rangeBand()) // since we defined an ordinal scale above, this automatically sets width to each column width
 			.attr('transform', 'translate(0 ,'+ margin.top +')')
 			.attr('fill', function(d) {return staining(d['Gram Staining'])}) // changes the color based on gram staining
-
-	  };
+	};
 
   /**
    * setupSections - each section is activated
@@ -209,34 +210,26 @@ var scrollVis = function() {
       .transition()
       .duration(600)
       .attr("opacity", 1);
+
+    g.selectAll(".axis")
+      .transition()
+      .duration(600)
+      .attr("opacity", 0);
+
+    g.selectAll(".bar")
+      .transition()
+      .duration(600)
+      .attr("opacity", 0);
   }
 
   function showPenicilin() {
+  	console.log(g);
     g.selectAll(".bacteria-title")
       .transition()
       .duration(0)
       .attr("opacity", 0);
 
-    g.selectAll('.axis')
-      .transition()
-      .duration(600)
-      .attr("opacity", 1.0);
-
-    g.selectAll(".bar")
-      .transition()
-      .duration(600)
-      .attr("opacity", 1.0);
-  }
-
-
-
-  function showPenicilin() {
-    g.selectAll(".bacteria-title")
-      .transition()
-      .duration(0)
-      .attr("opacity", 1);
-
-    g.selectAll('axis')
+    g.selectAll(".axis")
       .transition()
       .duration(600)
       .attr("opacity", 1.0);
@@ -333,12 +326,6 @@ function display(data) {
 
 // load data and display
 d3.csv("a1-burtin.csv", display);
-
-// asynchronously loads csv file, 
-// passes in the type() function which transforms a column of our data to an integer
-d3.csv("a1-burtin.csv", type, function(error, dataset) {
-
-});
 
 function type(d) {
   d.Penicilin = +d.Penicilin; // coerces the string to number
